@@ -1,0 +1,55 @@
+Step 1 - Create Two IAM roles as:
+            1. In first provide AmazonEC2RoleforAWSCodeDeploy and AmazonS3FullAccess
+            2. In second provide codedeplyrole role.        => ASG
+            This roles will be used further.
+
+Step 2 - Create 4 ec2 instances and put user data in it
+            #!/bin/bash
+            sudo yum -y update
+            sudo yum -y install ruby
+            sudo yum -y install wget
+            cd /home/ec2-user
+            wget https://aws-codedeploy-ap-south-1.s3.ap-south-1.amazonaws.com/l
+            atest/install
+            sudo chmod +x ./install
+            sudo ./install auto
+            sudo yum install -y python-pip
+            sudo pip install awscli
+
+            This user data includes installation of some software like awscodedeploy , awscli etc.
+            Then:
+            - Add first IAM role to the instances .
+            - Create Security Group and provide http 80 and ssh 22 rules.
+            - Then create instances.
+
+Step 3 - Create an AMI of any of the instance which we will use in AutoScalingGroup.
+
+Step 4 - Create Application Load Balancer.
+        1. Create target group than load balancer , in target group give path to /index.html , which is the app file containing code over git.
+
+        2. Now Create Application Load Balancer
+
+Step 5 - Create 'Launch Configurations' or 'Launch template' and than create Auto scaling group.
+        Launch Configuration created Now create AutoScalingGroup
+        Attach Application Load Balancer to it which is already created
+        Give Desired and max capacity to 2
+        Auto Scaling Group is created.
+        We can see as soon as ASG created , the two instances are up.
+
+Step 6 - Create one Jenkins Instance and install jenkins software in it.
+
+Step 7 - Create CodeDeploy
+         Create Application
+         Now Create Deployment Group
+            Enter ARN of the '2nd role'
+         Now Choose Amazon Ec2 ASG which we have Created earlier
+         Now choose Application Load balancer which we have created earlier
+         Deployment Group Is Created.
+         Now we will use Jenkins for Creating a pipeline that will use git as a source and will run the CodeDeploy
+
+Step 8 - Create an S3 bucket
+Step 9 - Go to Jenkins Server
+        - Install 'AWS CodeDeploy' and' AWS CodePipeline' plugin in it
+        https://github.com/vaibhavjain2099/aws_codedeploy_using_github.git
+        Create a jenkins pipeline by taking GIT as a source , Trigger - Poll SCM ( * * * * * ) which means it will run job in every minute.
+        Put S3 Bucket name etc.
