@@ -58,4 +58,6 @@ Step 9 - Go to Jenkins Server
             - Application group
             - Application deployment config
             - Put S3 Bucket name etc.
+
+            Therer is just so much to consider here.
         
