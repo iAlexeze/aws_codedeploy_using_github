@@ -1,10 +1,6 @@
 #!/bin/bash
-isExistApp = `pgrep httpd`
-if [[ -n  $isExistApp ]];
+isExistApp=`pgrep apache2`
+if [[ -n $isExistApp ]];
 then
-    service httpd stop 
-else {
-    echo "close your browser and relauch"
-}       
+    service apache2 stop
 fi
-
