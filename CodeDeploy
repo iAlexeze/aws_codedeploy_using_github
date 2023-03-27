@@ -53,3 +53,4 @@ Step 9 - Go to Jenkins Server
         https://github.com/vaibhavjain2099/aws_codedeploy_using_github.git
         Create a jenkins pipeline by taking GIT as a source , Trigger - Poll SCM ( * * * * * ) which means it will run job in every minute.
         Put S3 Bucket name etc.
+        Once you are done with this setup, everthing is good to go.
