@@ -4,17 +4,17 @@ Step 1 - Create Two IAM roles as:
             This roles will be used further.
 
 Step 2 - Create 4 ec2 instances and put user data in it
-            #!/bin/bash
-            sudo yum -y update
-            sudo yum -y install ruby
-            sudo yum -y install wget
-            cd /home/ec2-user
-            wget https://aws-codedeploy-ap-south-1.s3.ap-south-1.amazonaws.com/l
-            atest/install
-            sudo chmod +x ./install
-            sudo ./install auto
-            sudo yum install -y python-pip
-            sudo pip install awscli
+#!/bin/bash
+sudo apt-get update -y
+sudo apt-get install awscli -y
+sudo apt-get install ruby -y
+sudo apt-get install wget -y
+wget https://aws-codedeploy-us-east-1.s3.us-east-1.amazonaws.com/latest/install
+chmod +x ./install
+sudo ./install auto
+sudo hostname Deploy && sudo su - ubuntu
+
+
 
             This user data includes installation of some software like awscodedeploy , awscli etc.
             Then:
