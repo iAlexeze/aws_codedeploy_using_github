@@ -15,7 +15,13 @@ sudo ./install auto
 sudo hostname Deploy && sudo su - ubuntu
 
 
-
+sudo yum update -y
+sudo yum install awscli -y
+sudo yum install ruby -y
+sudo yum install wget -y
+wget https://aws-codedeploy-us-east-1.s3.us-east-1.amazonaws.com/latest/install
+chmod +x ./install
+sudo ./install auto
             This user data includes installation of some software like awscodedeploy , awscli etc.
             Then:
             - Add first IAM role to the instances .
